@@ -9,6 +9,8 @@ import { RespuestaMDB, Pelicula } from '../interfaces/interfaces';
 })
 export class Tab1Page implements OnInit{
   peliculasRecientes: Pelicula[] = [];
+  
+
   constructor(private MoviesService: MoviesService) {}
 
     ngOnInit(){
