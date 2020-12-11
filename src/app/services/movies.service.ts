@@ -10,13 +10,21 @@ const apiKey = environment.apiKey;
   providedIn: 'root'
 })
 export class MoviesService {
-
+  private popularesPage:number = 0;
   constructor(private http: HttpClient) { }
   private ejecutarQuery<T>(query: string){
     query = URL + query;
     query += `&api_key=${ apiKey }&language=es&include_image_language=es`;
     return this.http.get<T>(query);
   }
+
+  getPopulares(){
+    this.popularesPage++;
+    const query = `/discover/movie?sort_by=popularity.desc&page=${ this.popularesPage }`;
+    return this.ejecutarQuery<RespuestaMDB>(query);
+  }
+
+
   getFeature(){
     const hoy= new Date();
     const ultimoDia = new Date(hoy.getFullYear(), hoy.getMonth() + 1, 0).getDate();
